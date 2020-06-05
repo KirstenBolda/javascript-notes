@@ -151,7 +151,7 @@ Because || or statements check the left-hand condition first, the variable `defa
 - the code block contains all the `case`s and is enclosed in curly braces `{}`
 - each `case` keyword precedes a value that is compared with the variable's assigned value
 - if the values match the code following the colon `:` is executed
-- the `break` keyword exits the code, no more cases will be checked
+- the `break` keyword exits the code, no more cases will be checked (if `return` is used, break is not needed)
 - a `default` keyword on the last line precedes code that will run if there are no matching cases in the code block
 
  ```
