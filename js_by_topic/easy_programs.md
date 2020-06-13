@@ -89,6 +89,11 @@ Math.floor(Math.random() * 100);
 
 console.log(Math.floor(Math.random() * 100;));
 ```
+---
+### **Log the elements of an array inside an object to the console**
+
+
+
 
 
 

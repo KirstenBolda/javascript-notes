@@ -1,8 +1,10 @@
 ## **Objects**
 ---
 
-Collections of related data and functionality,  group of variables and functions to create a model of something from the real world  
+- Collections of related data and functionality  
+- group of variables and functions to create a model of something from the real world  
 - built-in data type
+- strings and numbers can behave the same as numbers in some instances
 
 In an Object:
 - unordered data is organized into key-value pairs
@@ -22,21 +24,37 @@ In an Object:
 - commas `,` to separate properties **(Very Important! Will cause errors if these are missing!)**
 - a **method** is a **property** with a **function** as its **value**
 - constructor literal uses `this` instead of object name, `= `to separate key/value variables and semicolons `;` to separate properties
-- keys are strings, but quotation marks may be omitted in the absence of any special charaters
 
+---
 ### **Create an Object using Literal Notation**
- ---
-  ```
+
+#### Object Literal Syntax
+- objects are assigned to variables 
+- use curly braces `{}` to designate the object literal
+- fill the object with unordered data organized into key-value pairs
+  - key name: the **identifier**
+    - points to a location holding the value
+    - the value can be any data type, including functions or other objects
+- key is separated from its associated value by a colon `:`
+- key-value pairs are separated by commas `,`
+- keys are strings, but quotation marks can be omitted if there are no special characters or spaces in the key name
+- values are strings and enclosed with quotation marks
+- use a semi-colon after the closing curly brace `};`
+ 
+*Example:*
+```
  const objectName = {
-     key1 : value1,
-     key2 : value2,
+     key1 : 'value1',
+     key2 : 'value2',
      methodName() {
        return some code;
      }
  };
+
  ```
- ### **Create an Object using Constructor Notation**
  ---
+ ### **Create an Object using Constructor Notation**
+ 
  ```
  const objectName = new Object();
      objectName.key1 = 'value1';
@@ -45,6 +63,7 @@ In an Object:
        return some code;
      };
  ```
+ ---
 ### **Including a method in an object literal**
 
 - Create key-value pairs
@@ -53,8 +72,33 @@ In an Object:
 - Omit colon and and `function` keyword in ES6
 - Invoked by appending the object's name with the dot operator and the method name with parentheses
 
-### **Creating an Object as a Property inside another Object**
-(nested object property (?))
+*Example:*
+```
+// pre ES6
+
+const myObject = {
+ letUsCode: function () {
+   console.log('Learning about Objects!')
+ }
+};
+
+// ES6 - omit colon : and `function` keyword 
+
+const myObject = {
+  letUsCode () {
+    console.log('Learning about Objects!')
+  }
+};
+
+myObject.letUsCode();
+// returns:
+Learning about Objects!
+```
+
+### Nested Objects
+- objects may have other objects as properties, and those objects may also have objects within them
+- chain objects to access the nested properties or methods
+
 - use the property name and colon syntax
 - use curly braces to enclose the object
 
@@ -67,38 +111,61 @@ In an Object:
     }
   }
   ```
+---
+## Accessing Properties and Methods in an Object
 
-#### Accessing Properties and Methods in an Object
-- Dot Notation (Member Operator)
-  - write property name (key) after the dot
+### Dot Notation (Member Operator) `.`
+
+#### Dot Notation Syntax
+- write name of the object
+- use the dot operator `.`
+- write property name (key) after the dot
+- end the statement with a semicolon `;`
+- if an attempting to access a property that doesn't exist operator returns `undefined`
+
+*Example:*
    ```
    destination.name;
    ```
 
-- Square Bracket Syntax
-  - pass in the property name (key) as a string
-  - *must* use bracket notation when accessing keys that have numbers, spaces, or special characters in them
+### Bracket Notation `[]`
+- *must* use bracket notation when accessing keys that have numbers, spaces, or special characters in them
+  - See above, creating an object literal, that keys with numbers, spaces or special characters will already be enclosed in quotes
+- can use a variable inside the brackets to select the keys of an object
+  - helpful when working with functions
+
+#### Square Bracket Syntax
+  - pass the property name (key) between brackets `[]` as a string enclosed in quotation marks `''`
   - used when a variable is used in place of a property name
-   ```
-   destination['name'];
-   ```
+  - end with a semi-colon `;`
+
+*Example:*
+```
+destination['name'];
+```
 
 
+### Modifying Key-Value Pairs
+- objects are mutable
+- if the property already exists, the new value will replace the existing one
+- if there is no property with that name, a new property will be added to the object
 
-#### Modifying Key-Value Pairs
-
+#### Property Assignment Syntax
 - Dot Notation/Assignment Operator: `.`
 
-   `objectName.property = 'value';`
+   `objectName.property = 'newValue';`
 
 - Bracket Notation: `[]`
 
-  `objectName['Property Change'] = 'value';`
+  `objectName['Property Change'] = 'newValue';`
 
 - delete a property with the `delete `operator
 
-   `delete objectName.property;`
-- clear the value of the property without deleting the key  
+   `delete objectName.property;`  
+  Or:  
+   `delete objectName['property two'];`
+
+- clear the value of the property without deleting the property key  
 
   `objectName.property = '';`
 
@@ -134,12 +201,66 @@ for (let variableName in outerObject.innerObject) {
 - only certain properties should be mutable or able to change in value
 -  place an underscore `_ `before the name of a property that should not be altered.
 
-#### Passing Objects as Arguments
-- when objects are passed as arguments to functions or methods, they are passed by **reference**, not by value
+### Passing Objects as Arguments
+- when objects are passed as arguments to functions or methods, they are **passed by reference**, not by value
 - primitive data types are passed by value and not mutable
-- means that the object itself (not a copy) is accessible and mutable (can be changed) inside that function
+- means that the object itself (not a copy) is accessible and **mutable** (can be changed) inside that function
 
-#### Getter Method
+### Looping through objects using `for...in`
+- executes a block of code for every property in an object
+- assign a variable for a key in the object's property
+- loop through the object keys using that variable
+
+*Example:* (from Codecademy course)
+
+```
+let spaceship = {
+    crew: {
+    captain: { 
+        name: 'Lily', 
+        degree: 'Computer Engineering', 
+        cheerTeam() { console.log('You got this!') } 
+        },
+    'chief officer': { 
+        name: 'Dan', 
+        degree: 'Aerospace Engineering', 
+        agree() { console.log('I agree, captain!') } 
+        },
+    medic: { 
+        name: 'Clementine', 
+        degree: 'Physics', 
+        announce() { console.log(`Jets on!`) } },
+    translator: {
+        name: 'Shauna', 
+        degree: 'Conservation Science', 
+        powerFuel() { console.log('The tank is full!') } 
+        }
+    }
+}; 
+
+for (let crewMember in spaceship.crew) {
+  console.log(`${crewMember} : ${spaceship.crew[crewMember].name}`)
+};
+
+// logs:
+captain : Lily
+chief officer : Dan
+medic : Clementine
+translator : Shauna
+
+for (let crewMember in spaceship.crew) {
+  console.log(`${crewMember} : ${spaceship.crew[crewMember].degree}`)
+};
+
+// logs:
+captain : Computer Engineering
+chief officer : Aerospace Engineering
+medic : Physics
+translator : Conservation Science
+```
+
+
+### Getter Method
 - used to respect the intention of properties prepended with `_`
 - use the `get` keyword followed by a function (method)
 - use `this` keyword to access the object's internal properties (the `_` prepended property)
